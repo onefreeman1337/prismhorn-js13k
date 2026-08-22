@@ -1,0 +1,18 @@
+# Pin line endings, because in this competition they are worth bytes.
+#
+# The packer deliberately KEEPS newlines — stripping them could let automatic
+# semicolon insertion change what the code means, which is the one way a naive
+# minifier breaks a game between the last playtest and the judge's browser. So
+# every newline survives into the archive and gets deflated.
+#
+# That makes the checkout's line-ending policy part of the build. MEASURED
+# 2026-08-22 on Windows, from identical source:
+#
+#     LF checkout    11,274 bytes zipped
+#     CRLF checkout  11,449 bytes zipped   (+175, and not our doing)
+#
+# Without this file a `git clone` on a machine with core.autocrlf=true rebuilds
+# a different archive from the one that was submitted — and for a game sitting
+# closer to the cap than this one, that difference is the difference between a
+# valid entry and a disqualified one.
+* text=auto eol=lf
